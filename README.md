@@ -24,8 +24,9 @@ and ``write()``, this software should be adapted to any microcontroller based co
 
 # Configuration and processing
 
-As all with all network analyzer measurements, there is a one to one relationship
-between frequency and time domain characteristrics through the inverse Fourier transform.
+As with all network analyzer measurements, there is a one to one relationship
+between frequency and time domain characteristrics through the inverse Fourier transform (see ``go.m`` 
+for processing).
 
 It is worth remembering the X-axis of each domain when setting the configuration:
 * typical delay lines will hardly exhibit responses beyond 4 microseconds, so that a frequency

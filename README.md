@@ -48,11 +48,11 @@ power and 32 to 40 dB attenuator.
 
 Wired configuration with various attenuators.
 
-<img src="figures/120cm.png>
+<img src="figures/120cm.png">
 
 Wireless measurement at a range of 120 cm with the default averaging of 40 sweeps
 
-<img src="figures/300cm.png>
+<img src="figures/300cm.png">
 
 Wireless measurement at a range of 300 cm with the default averaging of 40 sweeps and as
 a function of emitted power.

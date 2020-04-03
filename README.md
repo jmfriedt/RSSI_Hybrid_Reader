@@ -22,6 +22,10 @@ frequency response), and finally ``rssi_sdm.c`` the final software with options 
 from the command line. Assuming serial communication is available instead of ``read()``
 and ``write()``, this software should be adapted to any microcontroller based communication.
 
+<img src="figures/DSC00570small.jpg">
+
+<img src="figures/reader.jpg">
+
 # Configuration and processing
 
 As with all network analyzer measurements, there is a one to one relationship
@@ -38,7 +42,7 @@ samples should be more than enough (5 microseconds/250 samples=20 ns time resolu
 * windowing the frequency reponse prior to inverse Fourier transform might be advisable, although
 not done here.
 
-All tests performed on SAW Components (Dresden, Germany) reflective delay lines connected throgh
+All tests performed on SAW Components (Dresden, Germany) reflective delay lines connected through
 attenuators or  Huber & Suhner 8 dBi 2.45 GHz circularly polarized antennas.
 
 First attenuators for a reproducible setup: Friis equation tells us that a Free Space Propagation Loss
@@ -47,13 +51,15 @@ power and 32 to 40 dB attenuator.
 
 <img src="figures/250kHz.png">
 
-Wired configuration with various attenuators.
+Wired configuration with various attenuators -- 250 kHz (4 us) bandwidth.
 
 <img src="figures/120cm.png">
 
 Wireless measurement at a range of 120 cm with the default averaging of 40 sweeps, as a function of emitted
 power (legend). Top is the frequency domain response, bottom the inverse Fourier transform for time-domain
 response.
+
+<img src="figures/DSC00572.JPG">
 
 <img src="figures/300cm.png">
 

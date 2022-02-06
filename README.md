@@ -34,7 +34,7 @@ for processing).
 
 It is worth remembering the X-axis of each domain when setting the configuration:
 * typical delay lines will hardly exhibit responses beyond 4 microseconds, so that a frequency
-step of 250 kHz is enough (1/250 kHz=1 us). The frequency step is defined by the total time-domain
+step of 250 kHz is enough (1/250 kHz=4 us). The frequency step is defined by the total time-domain
 response duration
 * the bandwidth defined the time-resolution, or in other words the frequency step*number of
 points defined the time resolution as total duration/number of points. A typical number of 250 

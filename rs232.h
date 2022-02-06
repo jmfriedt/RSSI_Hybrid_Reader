@@ -11,7 +11,6 @@ int init_rs232();
 void free_rs232();
 void sendstr(int,char*);
 int  readstr(int,char*,int);
-struct termios oldtio,newtio;
 
 #define BAUDRATE B115200
 #define RS_DEVICE "/dev/ttyAMA0"

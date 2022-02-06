@@ -4,7 +4,7 @@
 
 #include "rs232.h"
 
-extern struct termios oldtio,newtio;
+struct termios oldtio,newtio;
 
 int init_rs232()
 {int fd;

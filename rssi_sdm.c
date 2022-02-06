@@ -8,35 +8,49 @@
 // #define DEBUG nothing
 
 int main(int argc,char **argv)
-{int fd,i,j,k,n,length;FILE *f;
+{int fd,i,j,k,n,length,tmp;FILE *f;
  long val;
  char c[256];
  char* filename=NULL;
  int cmd;
- int power = 40, fstart= 2405, samples=250, fstep=250, averages=40;
+ int power = 40, fstart= 2405, samples=250, fstep=250, averages=40, trx=0, ttx=0, drx=0;
 
- while ((cmd = getopt (argc, argv, "f:n:p:s:o:a:")) != -1) 
+ while ((cmd = getopt (argc, argv, "f:n:p:s:o:a:r:x:d")) != -1) 
    switch (cmd)
      {case 'f':
-        fstart=atoi(optarg);
+        tmp=atoi(optarg);
+        if ((tmp>=2404)&&(tmp<=2418)) fstart=tmp;
         break;
       case 'n':
-        samples=atoi(optarg);
+        tmp=atoi(optarg);
+        if ((tmp>=1)&&(tmp<=1022)) samples=tmp;
         break;
       case 'p':
-        power = atoi(optarg);
+        tmp=atoi(optarg);
+        if ((tmp>=0)&&(tmp<=63)) power=tmp;
         break;
       case 's':
-        fstep = atoi(optarg);
+        tmp=atoi(optarg);
+        if ((tmp>=0)&&(tmp<=1000)) fstep=tmp;
         break;
       case 'o':
         filename=optarg;
         break;
       case 'a':
-        averages=atoi(optarg);
+        tmp=atoi(optarg);
+        if ((tmp>=1)&&(tmp<=2047)) averages=tmp;
+        break;
+      case 'r':
+        trx=atoi(optarg);
+        break;
+      case 'x':
+        ttx=atoi(optarg);
+        break;
+      case 'd':
+        drx=atoi(optarg);
         break;
       default:
-        printf("%s [-f fstart] [-n samples] [-p power] [-s fstep] [-o filename]\n",argv[0]);
+        printf("%s [-f fstart] [-n samples] [-p power] [-s fstep] [-o filename] [-x transmit time] [-r receive time] [-d receive delay]\n",argv[0]);
      }
  fd=init_rs232(); 
 
@@ -123,6 +137,33 @@ int main(int argc,char **argv)
  do {read(fd,&c[0],1); 
      if (c[0]==6) printf("ACK\n"); else printf ("ACK not received: %x\n",c[0]);
     } while (c[0]!=6);
+ 
+ if (ttx>0)
+  {printf("cmd t0\n");
+   sprintf(c,"x2\r\n");   // transmit duration (x22.73 ns) 
+   sendstr(fd,c);
+   do {read(fd,&c[0],1); 
+       if (c[0]==6) printf("ACK\n"); else printf ("ACK not received: %x\n",c[0]);
+      } while (c[0]!=6);
+  }
+ 
+ if (trx>0)
+  {printf("cmd x2\n");
+   sprintf(c,"t1\r\n");   // receive duration (x22.73 ns)
+   sendstr(fd,c);
+   do {read(fd,&c[0],1); 
+       if (c[0]==6) printf("ACK\n"); else printf ("ACK not received: %x\n",c[0]);
+      } while (c[0]!=6);
+  }
+ 
+ if (drx>0)
+  {printf("cmd t2\n");
+   sprintf(c,"x2\r\n");   // receive delay (x22.73 ns)
+   sendstr(fd,c);
+   do {read(fd,&c[0],1); 
+       if (c[0]==6) printf("ACK\n"); else printf ("ACK not received: %x\n",c[0]);
+      } while (c[0]!=6);
+  }
 
  if (filename==NULL) 
     f=fopen("output.txt","w");
